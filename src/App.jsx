@@ -4,6 +4,7 @@ import ProductCard from './ProductCard'
 const App = () => {
        
   const[products,setProducts]=useState([]);
+  const[toggle,setToggle]=useState([]);
         
 
        function getProduct(){
@@ -30,7 +31,6 @@ const App = () => {
             //setProducts(response)
           //}).
          //catch((err)=>{}).catch((err)=>{})
-          
          //}) 
          
          
@@ -38,22 +38,23 @@ const App = () => {
         //const response=await fetch ("endpoint", {method:'GET'});
         //const data=await response.json();
 
-       
-
-       
         useEffect(()=>{
              getProduct();
         },[])
+
+
+        function handleclick(){
+          setToggle(!toggle);
+        }
          
   return (
     <div>
-      {
+      <button onClick={handleclick}>{toggle ? "hide data" : " show data"} </button>
+      { toggle?
          products.map((item)=>{
           return <ProductCard  title={item.title} image={item.image} price={item.price} key={item.id}/>
-
-          
          })
-      }
+       : ""}
       
        </div>
   )
